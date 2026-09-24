@@ -1,0 +1,759 @@
+{
+  "source_gold_csv": "data/gold/gold_pairs_labeled_v6.csv",
+  "git_sha": "9edb4ef88977e0904228f57ef74bc5e160db84a3",
+  "operating_points": {
+    "lexical": [
+      0.05
+    ],
+    "nli": [
+      0.05
+    ],
+    "embedding": [
+      0.4,
+      0.7
+    ]
+  },
+  "note": "Decomposition of the frozen aggregate gate (ablation_validgold4.json). Same backends, verbalizer, thresholds, and ACCEPT-positive metrics; predictions partitioned by corpus. Per-corpus confusion counts sum to the aggregate.",
+  "overall": {
+    "n_real": 234,
+    "n_accept": 89,
+    "n_reject": 145,
+    "n_inversions": 42,
+    "methods": {
+      "legacy_gate": {
+        "tp": 4,
+        "fp": 46,
+        "fn": 85,
+        "tn": 99,
+        "precision": 0.08,
+        "recall": 0.0449,
+        "f1": 0.0576,
+        "accuracy": 0.4402,
+        "dir_catch": null
+      },
+      "accept_all": {
+        "tp": 89,
+        "fp": 145,
+        "fn": 0,
+        "tn": 0,
+        "precision": 0.3803,
+        "recall": 1.0,
+        "f1": 0.5511,
+        "accuracy": 0.3803,
+        "dir_catch": null
+      },
+      "lexical@0.05": {
+        "tp": 80,
+        "fp": 104,
+        "fn": 9,
+        "tn": 41,
+        "precision": 0.4348,
+        "recall": 0.8989,
+        "f1": 0.5861,
+        "accuracy": 0.5171,
+        "dir_catch": 0.0,
+        "dir_caught": 0,
+        "dir_total": 42
+      },
+      "embedding@0.40": {
+        "tp": 47,
+        "fp": 66,
+        "fn": 42,
+        "tn": 79,
+        "precision": 0.4159,
+        "recall": 0.5281,
+        "f1": 0.4653,
+        "accuracy": 0.5385,
+        "dir_catch": 0.619,
+        "dir_caught": 26,
+        "dir_total": 42
+      },
+      "embedding@0.70": {
+        "tp": 26,
+        "fp": 20,
+        "fn": 63,
+        "tn": 125,
+        "precision": 0.5652,
+        "recall": 0.2921,
+        "f1": 0.3852,
+        "accuracy": 0.6453,
+        "dir_catch": 0.619,
+        "dir_caught": 26,
+        "dir_total": 42
+      },
+      "nli@0.05": {
+        "tp": 20,
+        "fp": 21,
+        "fn": 69,
+        "tn": 124,
+        "precision": 0.4878,
+        "recall": 0.2247,
+        "f1": 0.3077,
+        "accuracy": 0.6154,
+        "dir_catch": 0.619,
+        "dir_caught": 26,
+        "dir_total": 42
+      }
+    }
+  },
+  "per_corpus": {
+    "aka": {
+      "n_real": 50,
+      "n_accept": 12,
+      "n_reject": 38,
+      "n_inversions": 7,
+      "methods": {
+        "legacy_gate": {
+          "tp": 2,
+          "fp": 23,
+          "fn": 10,
+          "tn": 15,
+          "precision": 0.08,
+          "recall": 0.1667,
+          "f1": 0.1081,
+          "accuracy": 0.34,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 12,
+          "fp": 38,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.24,
+          "recall": 1.0,
+          "f1": 0.3871,
+          "accuracy": 0.24,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 10,
+          "fp": 20,
+          "fn": 2,
+          "tn": 18,
+          "precision": 0.3333,
+          "recall": 0.8333,
+          "f1": 0.4762,
+          "accuracy": 0.56,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 7
+        },
+        "embedding@0.40": {
+          "tp": 8,
+          "fp": 13,
+          "fn": 4,
+          "tn": 25,
+          "precision": 0.381,
+          "recall": 0.6667,
+          "f1": 0.4848,
+          "accuracy": 0.66,
+          "dir_catch": 0.8571,
+          "dir_caught": 6,
+          "dir_total": 7
+        },
+        "embedding@0.70": {
+          "tp": 6,
+          "fp": 3,
+          "fn": 6,
+          "tn": 35,
+          "precision": 0.6667,
+          "recall": 0.5,
+          "f1": 0.5714,
+          "accuracy": 0.82,
+          "dir_catch": 0.8571,
+          "dir_caught": 6,
+          "dir_total": 7
+        },
+        "nli@0.05": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 9,
+          "tn": 35,
+          "precision": 0.5,
+          "recall": 0.25,
+          "f1": 0.3333,
+          "accuracy": 0.76,
+          "dir_catch": 0.5714,
+          "dir_caught": 4,
+          "dir_total": 7
+        }
+      }
+    },
+    "nist80063": {
+      "n_real": 72,
+      "n_accept": 30,
+      "n_reject": 42,
+      "n_inversions": 12,
+      "methods": {
+        "legacy_gate": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 30,
+          "tn": 42,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.5833,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 30,
+          "fp": 42,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.4167,
+          "recall": 1.0,
+          "f1": 0.5882,
+          "accuracy": 0.4167,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 27,
+          "fp": 40,
+          "fn": 3,
+          "tn": 2,
+          "precision": 0.403,
+          "recall": 0.9,
+          "f1": 0.5567,
+          "accuracy": 0.4028,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 12
+        },
+        "embedding@0.40": {
+          "tp": 10,
+          "fp": 23,
+          "fn": 20,
+          "tn": 19,
+          "precision": 0.303,
+          "recall": 0.3333,
+          "f1": 0.3175,
+          "accuracy": 0.4028,
+          "dir_catch": 0.25,
+          "dir_caught": 3,
+          "dir_total": 12
+        },
+        "embedding@0.70": {
+          "tp": 7,
+          "fp": 9,
+          "fn": 23,
+          "tn": 33,
+          "precision": 0.4375,
+          "recall": 0.2333,
+          "f1": 0.3043,
+          "accuracy": 0.5556,
+          "dir_catch": 0.25,
+          "dir_caught": 3,
+          "dir_total": 12
+        },
+        "nli@0.05": {
+          "tp": 6,
+          "fp": 9,
+          "fn": 24,
+          "tn": 33,
+          "precision": 0.4,
+          "recall": 0.2,
+          "f1": 0.2667,
+          "accuracy": 0.5417,
+          "dir_catch": 0.5833,
+          "dir_caught": 7,
+          "dir_total": 12
+        }
+      }
+    },
+    "nist80063b": {
+      "n_real": 50,
+      "n_accept": 11,
+      "n_reject": 39,
+      "n_inversions": 11,
+      "methods": {
+        "legacy_gate": {
+          "tp": 2,
+          "fp": 23,
+          "fn": 9,
+          "tn": 16,
+          "precision": 0.08,
+          "recall": 0.1818,
+          "f1": 0.1111,
+          "accuracy": 0.36,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 11,
+          "fp": 39,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.22,
+          "recall": 1.0,
+          "f1": 0.3607,
+          "accuracy": 0.22,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 8,
+          "fp": 20,
+          "fn": 3,
+          "tn": 19,
+          "precision": 0.2857,
+          "recall": 0.7273,
+          "f1": 0.4103,
+          "accuracy": 0.54,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 11
+        },
+        "embedding@0.40": {
+          "tp": 9,
+          "fp": 15,
+          "fn": 2,
+          "tn": 24,
+          "precision": 0.375,
+          "recall": 0.8182,
+          "f1": 0.5143,
+          "accuracy": 0.66,
+          "dir_catch": 0.9091,
+          "dir_caught": 10,
+          "dir_total": 11
+        },
+        "embedding@0.70": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 5,
+          "tn": 35,
+          "precision": 0.6,
+          "recall": 0.5455,
+          "f1": 0.5714,
+          "accuracy": 0.82,
+          "dir_catch": 0.9091,
+          "dir_caught": 10,
+          "dir_total": 11
+        },
+        "nli@0.05": {
+          "tp": 3,
+          "fp": 6,
+          "fn": 8,
+          "tn": 33,
+          "precision": 0.3333,
+          "recall": 0.2727,
+          "f1": 0.3,
+          "accuracy": 0.72,
+          "dir_catch": 0.6364,
+          "dir_caught": 7,
+          "dir_total": 11
+        }
+      }
+    },
+    "owaspasvs": {
+      "n_real": 62,
+      "n_accept": 36,
+      "n_reject": 26,
+      "n_inversions": 12,
+      "methods": {
+        "legacy_gate": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 36,
+          "tn": 26,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.4194,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 36,
+          "fp": 26,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.5806,
+          "recall": 1.0,
+          "f1": 0.7347,
+          "accuracy": 0.5806,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 35,
+          "fp": 24,
+          "fn": 1,
+          "tn": 2,
+          "precision": 0.5932,
+          "recall": 0.9722,
+          "f1": 0.7368,
+          "accuracy": 0.5968,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 12
+        },
+        "embedding@0.40": {
+          "tp": 20,
+          "fp": 15,
+          "fn": 16,
+          "tn": 11,
+          "precision": 0.5714,
+          "recall": 0.5556,
+          "f1": 0.5634,
+          "accuracy": 0.5,
+          "dir_catch": 0.5833,
+          "dir_caught": 7,
+          "dir_total": 12
+        },
+        "embedding@0.70": {
+          "tp": 7,
+          "fp": 4,
+          "fn": 29,
+          "tn": 22,
+          "precision": 0.6364,
+          "recall": 0.1944,
+          "f1": 0.2979,
+          "accuracy": 0.4677,
+          "dir_catch": 0.5833,
+          "dir_caught": 7,
+          "dir_total": 12
+        },
+        "nli@0.05": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 28,
+          "tn": 23,
+          "precision": 0.7273,
+          "recall": 0.2222,
+          "f1": 0.3404,
+          "accuracy": 0.5,
+          "dir_catch": 0.6667,
+          "dir_caught": 8,
+          "dir_total": 12
+        }
+      }
+    }
+  },
+  "loco": {
+    "held_out=aka": {
+      "n_real": 50,
+      "n_accept": 12,
+      "n_reject": 38,
+      "n_inversions": 7,
+      "methods": {
+        "legacy_gate": {
+          "tp": 2,
+          "fp": 23,
+          "fn": 10,
+          "tn": 15,
+          "precision": 0.08,
+          "recall": 0.1667,
+          "f1": 0.1081,
+          "accuracy": 0.34,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 12,
+          "fp": 38,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.24,
+          "recall": 1.0,
+          "f1": 0.3871,
+          "accuracy": 0.24,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 10,
+          "fp": 20,
+          "fn": 2,
+          "tn": 18,
+          "precision": 0.3333,
+          "recall": 0.8333,
+          "f1": 0.4762,
+          "accuracy": 0.56,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 7
+        },
+        "embedding@0.40": {
+          "tp": 8,
+          "fp": 13,
+          "fn": 4,
+          "tn": 25,
+          "precision": 0.381,
+          "recall": 0.6667,
+          "f1": 0.4848,
+          "accuracy": 0.66,
+          "dir_catch": 0.8571,
+          "dir_caught": 6,
+          "dir_total": 7
+        },
+        "embedding@0.70": {
+          "tp": 6,
+          "fp": 3,
+          "fn": 6,
+          "tn": 35,
+          "precision": 0.6667,
+          "recall": 0.5,
+          "f1": 0.5714,
+          "accuracy": 0.82,
+          "dir_catch": 0.8571,
+          "dir_caught": 6,
+          "dir_total": 7
+        },
+        "nli@0.05": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 9,
+          "tn": 35,
+          "precision": 0.5,
+          "recall": 0.25,
+          "f1": 0.3333,
+          "accuracy": 0.76,
+          "dir_catch": 0.5714,
+          "dir_caught": 4,
+          "dir_total": 7
+        }
+      }
+    },
+    "held_out=nist80063": {
+      "n_real": 72,
+      "n_accept": 30,
+      "n_reject": 42,
+      "n_inversions": 12,
+      "methods": {
+        "legacy_gate": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 30,
+          "tn": 42,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.5833,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 30,
+          "fp": 42,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.4167,
+          "recall": 1.0,
+          "f1": 0.5882,
+          "accuracy": 0.4167,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 27,
+          "fp": 40,
+          "fn": 3,
+          "tn": 2,
+          "precision": 0.403,
+          "recall": 0.9,
+          "f1": 0.5567,
+          "accuracy": 0.4028,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 12
+        },
+        "embedding@0.40": {
+          "tp": 10,
+          "fp": 23,
+          "fn": 20,
+          "tn": 19,
+          "precision": 0.303,
+          "recall": 0.3333,
+          "f1": 0.3175,
+          "accuracy": 0.4028,
+          "dir_catch": 0.25,
+          "dir_caught": 3,
+          "dir_total": 12
+        },
+        "embedding@0.70": {
+          "tp": 7,
+          "fp": 9,
+          "fn": 23,
+          "tn": 33,
+          "precision": 0.4375,
+          "recall": 0.2333,
+          "f1": 0.3043,
+          "accuracy": 0.5556,
+          "dir_catch": 0.25,
+          "dir_caught": 3,
+          "dir_total": 12
+        },
+        "nli@0.05": {
+          "tp": 6,
+          "fp": 9,
+          "fn": 24,
+          "tn": 33,
+          "precision": 0.4,
+          "recall": 0.2,
+          "f1": 0.2667,
+          "accuracy": 0.5417,
+          "dir_catch": 0.5833,
+          "dir_caught": 7,
+          "dir_total": 12
+        }
+      }
+    },
+    "held_out=nist80063b": {
+      "n_real": 50,
+      "n_accept": 11,
+      "n_reject": 39,
+      "n_inversions": 11,
+      "methods": {
+        "legacy_gate": {
+          "tp": 2,
+          "fp": 23,
+          "fn": 9,
+          "tn": 16,
+          "precision": 0.08,
+          "recall": 0.1818,
+          "f1": 0.1111,
+          "accuracy": 0.36,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 11,
+          "fp": 39,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.22,
+          "recall": 1.0,
+          "f1": 0.3607,
+          "accuracy": 0.22,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 8,
+          "fp": 20,
+          "fn": 3,
+          "tn": 19,
+          "precision": 0.2857,
+          "recall": 0.7273,
+          "f1": 0.4103,
+          "accuracy": 0.54,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 11
+        },
+        "embedding@0.40": {
+          "tp": 9,
+          "fp": 15,
+          "fn": 2,
+          "tn": 24,
+          "precision": 0.375,
+          "recall": 0.8182,
+          "f1": 0.5143,
+          "accuracy": 0.66,
+          "dir_catch": 0.9091,
+          "dir_caught": 10,
+          "dir_total": 11
+        },
+        "embedding@0.70": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 5,
+          "tn": 35,
+          "precision": 0.6,
+          "recall": 0.5455,
+          "f1": 0.5714,
+          "accuracy": 0.82,
+          "dir_catch": 0.9091,
+          "dir_caught": 10,
+          "dir_total": 11
+        },
+        "nli@0.05": {
+          "tp": 3,
+          "fp": 6,
+          "fn": 8,
+          "tn": 33,
+          "precision": 0.3333,
+          "recall": 0.2727,
+          "f1": 0.3,
+          "accuracy": 0.72,
+          "dir_catch": 0.6364,
+          "dir_caught": 7,
+          "dir_total": 11
+        }
+      }
+    },
+    "held_out=owaspasvs": {
+      "n_real": 62,
+      "n_accept": 36,
+      "n_reject": 26,
+      "n_inversions": 12,
+      "methods": {
+        "legacy_gate": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 36,
+          "tn": 26,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.4194,
+          "dir_catch": null
+        },
+        "accept_all": {
+          "tp": 36,
+          "fp": 26,
+          "fn": 0,
+          "tn": 0,
+          "precision": 0.5806,
+          "recall": 1.0,
+          "f1": 0.7347,
+          "accuracy": 0.5806,
+          "dir_catch": null
+        },
+        "lexical@0.05": {
+          "tp": 35,
+          "fp": 24,
+          "fn": 1,
+          "tn": 2,
+          "precision": 0.5932,
+          "recall": 0.9722,
+          "f1": 0.7368,
+          "accuracy": 0.5968,
+          "dir_catch": 0.0,
+          "dir_caught": 0,
+          "dir_total": 12
+        },
+        "embedding@0.40": {
+          "tp": 20,
+          "fp": 15,
+          "fn": 16,
+          "tn": 11,
+          "precision": 0.5714,
+          "recall": 0.5556,
+          "f1": 0.5634,
+          "accuracy": 0.5,
+          "dir_catch": 0.5833,
+          "dir_caught": 7,
+          "dir_total": 12
+        },
+        "embedding@0.70": {
+          "tp": 7,
+          "fp": 4,
+          "fn": 29,
+          "tn": 22,
+          "precision": 0.6364,
+          "recall": 0.1944,
+          "f1": 0.2979,
+          "accuracy": 0.4677,
+          "dir_catch": 0.5833,
+          "dir_caught": 7,
+          "dir_total": 12
+        },
+        "nli@0.05": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 28,
+          "tn": 23,
+          "precision": 0.7273,
+          "recall": 0.2222,
+          "f1": 0.3404,
+          "accuracy": 0.5,
+          "dir_catch": 0.6667,
+          "dir_caught": 8,
+          "dir_total": 12
+        }
+      }
+    }
+  }
+}
