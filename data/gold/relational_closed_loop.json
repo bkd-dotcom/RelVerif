@@ -1,0 +1,304 @@
+{
+  "description": "End-to-end: LLM-extracted relational rules compiled into Z3; for each anchor the published-attack vulnerability is discovered (SAT) without the mitigating rule and closed (UNSAT) by the EXTRACTED mitigation. Three anchors demonstrate the loop generalises beyond one property (serving-network binding + SUPI concealment / IMSI-catcher + key confirmation / forged accept).",
+  "welltypedness_gate": {
+    "rejected_hallucinated_predicate": true,
+    "reason": "unknown predicate 'teleports_key'"
+  },
+  "anchors": [
+    {
+      "property": "serving_network_binding",
+      "published_attack": "NDSS'19 serving-network confusion",
+      "mitigation_id": "REL13",
+      "runs": [
+        {
+          "property": "serving_network_binding",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL25",
+            "REL36",
+            "REL46",
+            "REL48"
+          ],
+          "mitigation_rule_id": "REL13",
+          "mitigation_source": "extracted:ica_meta-llama_llama-4-maverick-17b-128e-instruct-fp8",
+          "n_base_rules_compiled": 39,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "ica_meta-llama_llama-4-maverick-17b-128e-instruct-fp8",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF authenticated_with(s:Session, u:UE, sn:SN) THEN key_bound_to(s:Session, k:Key, sn:SN)",
+          "exclude_auto_derived": [
+            "key_bound_to"
+          ],
+          "carriers_excluded": [
+            "REL04",
+            "REL13",
+            "REL17",
+            "REL23",
+            "REL33",
+            "REL41",
+            "REL50"
+          ]
+        },
+        {
+          "property": "serving_network_binding",
+          "discovered_vulnerability": true,
+          "fixed": false,
+          "secure_world_exists": true,
+          "end_to_end_validated": false,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL47"
+          ],
+          "mitigation_rule_id": "REL13",
+          "mitigation_source": "extracted:ollama_gpt-oss-120b",
+          "n_base_rules_compiled": 42,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "ollama_gpt-oss-120b",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF authenticated_with(s:Session, u:UE, n:SN) AND derives_key(s:Session, n:SN, k:Key) THEN key_bound_to(s:Session, k:Key, n:SN)",
+          "exclude_auto_derived": [
+            "key_bound_to"
+          ],
+          "carriers_excluded": [
+            "REL04",
+            "REL13",
+            "REL17",
+            "REL23",
+            "REL33",
+            "REL41",
+            "REL50"
+          ]
+        },
+        {
+          "property": "serving_network_binding",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": true,
+          "conflicting_rules": [],
+          "mitigation_rule_id": "REL13",
+          "mitigation_source": "gold",
+          "n_base_rules_compiled": 43,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "gold-control",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF authenticated_with(session:Session, ue:UE, sn:SN) THEN key_bound_to(session:Session, k:Key, sn:SN)",
+          "exclude_auto_derived": [
+            "key_bound_to"
+          ],
+          "carriers_excluded": [
+            "REL04",
+            "REL13",
+            "REL17",
+            "REL23",
+            "REL33",
+            "REL41",
+            "REL50"
+          ]
+        }
+      ],
+      "all_runs_validated": false
+    },
+    {
+      "property": "supi_concealment",
+      "published_attack": "IMSI-catcher (cleartext subscriber identity)",
+      "mitigation_id": "REL02",
+      "runs": [
+        {
+          "property": "supi_concealment",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL20",
+            "REL25",
+            "REL36",
+            "REL46",
+            "REL48"
+          ],
+          "mitigation_rule_id": "REL02",
+          "mitigation_source": "extracted:ica_meta-llama_llama-4-maverick-17b-128e-instruct-fp8",
+          "n_base_rules_compiled": 40,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "ica_meta-llama_llama-4-maverick-17b-128e-instruct-fp8",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF identifies(m:Message, u:UE) THEN encrypted_with_hn_key(m:Message, h:HN)",
+          "exclude_auto_derived": [
+            "encrypted_with_hn_key"
+          ],
+          "carriers_excluded": [
+            "REL02",
+            "REL24",
+            "REL35",
+            "REL43",
+            "REL47"
+          ]
+        },
+        {
+          "property": "supi_concealment",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL20"
+          ],
+          "mitigation_rule_id": "REL02",
+          "mitigation_source": "extracted:ollama_gpt-oss-120b",
+          "n_base_rules_compiled": 44,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "ollama_gpt-oss-120b",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF identifies(m:Message, u:UE) THEN encrypted_with_hn_key(m:Message, h:HN)",
+          "exclude_auto_derived": [
+            "encrypted_with_hn_key"
+          ],
+          "carriers_excluded": [
+            "REL02",
+            "REL24",
+            "REL35",
+            "REL43",
+            "REL47"
+          ]
+        },
+        {
+          "property": "supi_concealment",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL20"
+          ],
+          "mitigation_rule_id": "REL02",
+          "mitigation_source": "gold",
+          "n_base_rules_compiled": 44,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "gold-control",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF identifies(m:Message, ue:UE) THEN encrypted_with_hn_key(m:Message, hn:HN)",
+          "exclude_auto_derived": [
+            "encrypted_with_hn_key"
+          ],
+          "carriers_excluded": [
+            "REL02",
+            "REL24",
+            "REL35",
+            "REL43",
+            "REL47"
+          ]
+        }
+      ],
+      "all_runs_validated": true
+    },
+    {
+      "property": "key_confirmation",
+      "published_attack": "forged accept without challenge-response key confirmation",
+      "mitigation_id": "REL11",
+      "runs": [
+        {
+          "property": "key_confirmation",
+          "discovered_vulnerability": true,
+          "fixed": false,
+          "secure_world_exists": true,
+          "end_to_end_validated": false,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL25",
+            "REL36",
+            "REL46",
+            "REL48"
+          ],
+          "mitigation_rule_id": "REL11",
+          "mitigation_source": "extracted:ica_meta-llama_llama-4-maverick-17b-128e-instruct-fp8",
+          "n_base_rules_compiled": 41,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "ica_meta-llama_llama-4-maverick-17b-128e-instruct-fp8",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF res_matches_xres(s:Session, u:UE) THEN accepts(s:Session, u:UE)",
+          "exclude_auto_derived": [
+            "res_matches_xres"
+          ],
+          "carriers_excluded": [
+            "REL11",
+            "REL26",
+            "REL27",
+            "REL44",
+            "REL49"
+          ]
+        },
+        {
+          "property": "key_confirmation",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": false,
+          "conflicting_rules": [
+            "REL47"
+          ],
+          "mitigation_rule_id": "REL11",
+          "mitigation_source": "extracted:ollama_gpt-oss-120b",
+          "n_base_rules_compiled": 46,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "ollama_gpt-oss-120b",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF accepts(s:Session, u:UE) THEN res_matches_xres(s:Session, u:UE)",
+          "exclude_auto_derived": [
+            "res_matches_xres"
+          ],
+          "carriers_excluded": [
+            "REL11",
+            "REL44",
+            "REL49"
+          ]
+        },
+        {
+          "property": "key_confirmation",
+          "discovered_vulnerability": true,
+          "fixed": true,
+          "secure_world_exists": true,
+          "end_to_end_validated": true,
+          "base_consistent": true,
+          "conflicting_rules": [],
+          "mitigation_rule_id": "REL11",
+          "mitigation_source": "gold",
+          "n_base_rules_compiled": 47,
+          "n_base_rules_rejected": 0,
+          "rejected": [],
+          "extractor": "gold-control",
+          "n_rules_available": 50,
+          "mitigation_rule": "IF accepts(session:Session, ue:UE) THEN res_matches_xres(session:Session, ue:UE)",
+          "exclude_auto_derived": [
+            "res_matches_xres"
+          ],
+          "carriers_excluded": [
+            "REL11",
+            "REL44",
+            "REL49"
+          ]
+        }
+      ],
+      "all_runs_validated": false
+    }
+  ],
+  "n_anchors": 3,
+  "all_anchors_validated": false
+}

@@ -1,0 +1,1 @@
+{"rule_id": "REL34", "source_text": "A UE checks the freshness of the challenge only if the message authentication code is verified.", "premises": [{"name": "freshness_checked", "args": ["s", "n"], "sorts": ["Session", "Nonce"], "negated": false}], "conclusions": [{"name": "mac_verified", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

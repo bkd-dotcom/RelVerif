@@ -1,0 +1,3127 @@
+{
+  "description": "Three measurements of semantic preservation across the bounded Z3 / unbounded Tamarin transition: that both backends are driven by the same property AST, how much of the vocabulary the declared MSR skeleton can witness at all, and how often the two backends agree on properties it can witness -- with disagreements classified rather than discarded.",
+  "git_sha": "unknown",
+  "generated_at": "2026-09-23T03:49:01+00:00",
+  "universe_sizes": {
+    "UE": 2,
+    "SN": 2,
+    "HN": 1,
+    "Session": 1,
+    "Key": 1,
+    "Nonce": 1,
+    "SQN": 1,
+    "Message": 1,
+    "Failure": 2
+  },
+  "tamarin_timeout_s": 60,
+  "encoding_equivalence": [
+    {
+      "property": "serving_network_binding",
+      "property_ast": "AKA_P04_binding",
+      "equivalent": true,
+      "detail": "no countermodel: the two encodings are the same bounded sentence",
+      "legacy_goal": "ForAll([s, ue, sn, k],\n       Implies(And(ru1_authenticated_with(s, ue, sn),\n                   ru1_accepts(s, ue)),\n               ru1_key_bound_to(s, k, sn)))",
+      "ast_derived_goal": "ForAll([s, u, n, key],\n       Implies(And(ru1_accepts(s, u),\n                   ru1_authenticated_with(s, u, n)),\n               ru1_key_bound_to(s, key, n)))"
+    },
+    {
+      "property": "supi_concealment",
+      "property_ast": "AKA_P_supi",
+      "equivalent": true,
+      "detail": "no countermodel: the two encodings are the same bounded sentence",
+      "legacy_goal": "ForAll([m, ue, hn],\n       Implies(ru2_identifies(m, ue),\n               ru2_encrypted_with_hn_key(m, hn)))",
+      "ast_derived_goal": "ForAll([m, u, h],\n       Implies(ru2_identifies(m, u),\n               ru2_encrypted_with_hn_key(m, h)))"
+    },
+    {
+      "property": "key_confirmation",
+      "property_ast": "AKA_P_keyconf",
+      "equivalent": true,
+      "detail": "no countermodel: the two encodings are the same bounded sentence",
+      "legacy_goal": "ForAll([s, ue],\n       Implies(ru3_accepts(s, ue),\n               ru3_res_matches_xres(s, ue)))",
+      "ast_derived_goal": "ForAll([s, u],\n       Implies(ru3_accepts(s, u),\n               ru3_res_matches_xres(s, u)))"
+    }
+  ],
+  "encoding_equivalence_all_hold": true,
+  "schema_expressiveness": {
+    "action_facts_emitted": [
+      "Accepts",
+      "AuthenticatedWith",
+      "KeyBoundTo"
+    ],
+    "n_vocabulary_predicates": 19,
+    "vocabulary_predicates_expressible": [
+      "accepts",
+      "authenticated_with",
+      "key_bound_to"
+    ],
+    "n_vocabulary_predicates_expressible": 3,
+    "gold_rules_expressible": [
+      "REL13",
+      "REL19",
+      "REL23",
+      "REL50"
+    ],
+    "n_gold_rules": 50,
+    "n_gold_rules_expressible": 4,
+    "anchors_expressible": [
+      "serving_network_binding"
+    ],
+    "note": "The unbounded leg can only witness properties over the action facts the declared skeleton emits. Everything outside that set is an expert modelling task, not an automated one."
+  },
+  "bounded_theory": {
+    "n_rules_in_theory": 50,
+    "excluded_rule_ids": [],
+    "note": "The extracted specification itself, as the bounded model under test."
+  },
+  "n_candidates": 24,
+  "gates_by_mutation_kind": {
+    "original": {
+      "z3_gate": 0,
+      "tamarin_gate": 1,
+      "passed_both": 4
+    },
+    "mutant:converse": {
+      "z3_gate": 0,
+      "tamarin_gate": 1,
+      "passed_both": 4
+    },
+    "mutant:drop_premise0": {
+      "z3_gate": 0,
+      "tamarin_gate": 0,
+      "passed_both": 2
+    },
+    "mutant:drop_premise1": {
+      "z3_gate": 0,
+      "tamarin_gate": 0,
+      "passed_both": 2
+    },
+    "mutant:permute_args": {
+      "z3_gate": 5,
+      "tamarin_gate": 0,
+      "passed_both": 0
+    },
+    "mutant:negate_conclusion": {
+      "z3_gate": 0,
+      "tamarin_gate": 5,
+      "passed_both": 0
+    }
+  },
+  "agreement_counts": {
+    "agree": 4,
+    "bounded_falsified_unbounded_verified": 4,
+    "bounded_verified_unbounded_falsified": 4,
+    "z3_gate_rejected": 5,
+    "tamarin_gate_rejected": 7
+  },
+  "agreement_rate_on_comparable": 0.3333,
+  "expert_guard_required": {
+    "candidates": [
+      "anchor:serving_network_binding~drop_premise0",
+      "gold:REL13",
+      "gold:REL19",
+      "gold:REL23~drop_premise0"
+    ],
+    "n": 4,
+    "meaning": "bounded-verified but unbounded-falsified: the extracted rule entails the property, yet the operational model admits a trace violating it. Closing these needs an operational guard the bounded leg cannot see."
+  },
+  "guard_localisation": [
+    {
+      "needs_guard": "anchor:serving_network_binding~drop_premise0",
+      "rule": "IF authenticated_with(s:Session, u:UE, n:SN) THEN key_bound_to(s:Session, key:Key, n:SN)",
+      "missing_premises": [
+        "accepts"
+      ],
+      "guarded_form_already_extracted": [
+        "gold:REL23"
+      ],
+      "resolution": "recoverable from extraction output"
+    },
+    {
+      "needs_guard": "gold:REL13",
+      "rule": "IF authenticated_with(session:Session, ue:UE, sn:SN) THEN key_bound_to(session:Session, k:Key, sn:SN)",
+      "missing_premises": [
+        "accepts"
+      ],
+      "guarded_form_already_extracted": [
+        "gold:REL23"
+      ],
+      "resolution": "recoverable from extraction output"
+    },
+    {
+      "needs_guard": "gold:REL19",
+      "rule": "IF authenticated_with(session:Session, ue:UE, sn:SN) THEN accepts(session:Session, ue:UE)",
+      "missing_premises": [],
+      "guarded_form_already_extracted": [],
+      "resolution": "requires expert modelling"
+    },
+    {
+      "needs_guard": "gold:REL23~drop_premise0",
+      "rule": "IF authenticated_with(session:Session, ue:UE, sn:SN) THEN key_bound_to(session:Session, k:Key, sn:SN)",
+      "missing_premises": [
+        "accepts"
+      ],
+      "guarded_form_already_extracted": [
+        "gold:REL23"
+      ],
+      "resolution": "recoverable from extraction output"
+    }
+  ],
+  "expert_intervention_rate": {
+    "n_needing_guard": 4,
+    "n_recoverable_from_extraction": 3,
+    "n_requiring_expert_modelling": 1
+  },
+  "runtime_s": {
+    "bounded_median": 0.0053,
+    "bounded_max": 0.0068,
+    "unbounded_median": 0.186,
+    "unbounded_max": 0.322
+  },
+  "candidates": [
+    {
+      "candidate": "anchor:serving_network_binding",
+      "kind": "original",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0035,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.3216,
+        "steps": 2
+      },
+      "agreement": "agree"
+    },
+    {
+      "candidate": "anchor:serving_network_binding~converse",
+      "kind": "mutant:converse",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0068,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ]
+          },
+          "authorized_by_hn": {
+            "holds": [],
+            "fails": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ]
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "accepts": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.1824,
+        "steps": 5
+      },
+      "agreement": "bounded_falsified_unbounded_verified"
+    },
+    {
+      "candidate": "anchor:serving_network_binding~drop_premise0",
+      "kind": "mutant:drop_premise0",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0043,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.1969,
+        "steps": 3
+      },
+      "agreement": "bounded_verified_unbounded_falsified"
+    },
+    {
+      "candidate": "anchor:serving_network_binding~drop_premise1",
+      "kind": "mutant:drop_premise1",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.004,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.1963,
+        "steps": 2
+      },
+      "agreement": "agree"
+    },
+    {
+      "candidate": "anchor:serving_network_binding~permute_args",
+      "kind": "mutant:permute_args",
+      "bounded": {
+        "verdict": "gate_rejected",
+        "detail": "variable 's' used at both UE and Session"
+      },
+      "unbounded": null,
+      "agreement": "z3_gate_rejected"
+    },
+    {
+      "candidate": "anchor:serving_network_binding~negate_conclusion",
+      "kind": "mutant:negate_conclusion",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.006,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'key_bound_to' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL13",
+      "kind": "original",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0022,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.198,
+        "steps": 3
+      },
+      "agreement": "bounded_verified_unbounded_falsified"
+    },
+    {
+      "candidate": "gold:REL13~converse",
+      "kind": "mutant:converse",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0055,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ]
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.19,
+        "steps": 5
+      },
+      "agreement": "bounded_falsified_unbounded_verified"
+    },
+    {
+      "candidate": "gold:REL13~permute_args",
+      "kind": "mutant:permute_args",
+      "bounded": {
+        "verdict": "gate_rejected",
+        "detail": "variable 'session' used at both SN and Session"
+      },
+      "unbounded": null,
+      "agreement": "z3_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL13~negate_conclusion",
+      "kind": "mutant:negate_conclusion",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0057,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "forwards_res": {
+            "holds": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'key_bound_to' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL19",
+      "kind": "original",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0022,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.1865,
+        "steps": 3
+      },
+      "agreement": "bounded_verified_unbounded_falsified"
+    },
+    {
+      "candidate": "gold:REL19~converse",
+      "kind": "mutant:converse",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0055,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ]
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.2021,
+        "steps": 5
+      },
+      "agreement": "bounded_falsified_unbounded_verified"
+    },
+    {
+      "candidate": "gold:REL19~permute_args",
+      "kind": "mutant:permute_args",
+      "bounded": {
+        "verdict": "gate_rejected",
+        "detail": "variable 'session' used at both SN and Session"
+      },
+      "unbounded": null,
+      "agreement": "z3_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL19~negate_conclusion",
+      "kind": "mutant:negate_conclusion",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0055,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sends_failure": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ],
+            "fails": []
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'accepts' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL23",
+      "kind": "original",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0023,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.2073,
+        "steps": 2
+      },
+      "agreement": "agree"
+    },
+    {
+      "candidate": "gold:REL23~converse",
+      "kind": "mutant:converse",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0062,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ]
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.2008,
+        "steps": 5
+      },
+      "agreement": "bounded_falsified_unbounded_verified"
+    },
+    {
+      "candidate": "gold:REL23~drop_premise0",
+      "kind": "mutant:drop_premise0",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0023,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.1997,
+        "steps": 3
+      },
+      "agreement": "bounded_verified_unbounded_falsified"
+    },
+    {
+      "candidate": "gold:REL23~drop_premise1",
+      "kind": "mutant:drop_premise1",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.004,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.1739,
+        "steps": 2
+      },
+      "agreement": "agree"
+    },
+    {
+      "candidate": "gold:REL23~permute_args",
+      "kind": "mutant:permute_args",
+      "bounded": {
+        "verdict": "gate_rejected",
+        "detail": "variable 'session' used at both UE and Session"
+      },
+      "unbounded": null,
+      "agreement": "z3_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL23~negate_conclusion",
+      "kind": "mutant:negate_conclusion",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0053,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "forwards_res": {
+            "holds": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'key_bound_to' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL50",
+      "kind": "original",
+      "bounded": {
+        "verdict": "verified",
+        "elapsed_s": 0.0023,
+        "detail": "no counterexample within the bound"
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'key_bound_to' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL50~converse",
+      "kind": "mutant:converse",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.0059,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ]
+          },
+          "authorized_by_hn": {
+            "holds": [],
+            "fails": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ]
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ],
+            "fails": []
+          },
+          "uses_snn_in_kdf": {
+            "holds": [
+              [
+                "session0",
+                "key0"
+              ]
+            ],
+            "fails": []
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "accepts": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "sends_failure": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ],
+            "fails": []
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'accepts' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL50~permute_args",
+      "kind": "mutant:permute_args",
+      "bounded": {
+        "verdict": "gate_rejected",
+        "detail": "variable 'session' used at both SN and Session"
+      },
+      "unbounded": null,
+      "agreement": "z3_gate_rejected"
+    },
+    {
+      "candidate": "gold:REL50~negate_conclusion",
+      "kind": "mutant:negate_conclusion",
+      "bounded": {
+        "verdict": "falsified",
+        "elapsed_s": 0.006,
+        "detail": "counterexample within the bound",
+        "witness": {
+          "conceals_supi": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "authenticated_with": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "sn1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "sn1"
+              ]
+            ]
+          },
+          "authorized_by_hn": {
+            "holds": [
+              [
+                "sn0",
+                "hn0"
+              ],
+              [
+                "sn1",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_key": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "key0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "key0"
+              ]
+            ]
+          },
+          "key_bound_to": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "key0",
+                "sn0"
+              ],
+              [
+                "session0",
+                "key0",
+                "sn1"
+              ]
+            ]
+          },
+          "uses_snn_in_kdf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "key0"
+              ]
+            ]
+          },
+          "mac_verified": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "sqn_in_range": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "computes_res": {
+            "holds": [
+              [
+                "session0",
+                "ue0",
+                "message0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "message0"
+              ]
+            ],
+            "fails": []
+          },
+          "res_matches_xres": {
+            "holds": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ],
+            "fails": []
+          },
+          "accepts": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          },
+          "sends_failure": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue0",
+                "failure1"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure0"
+              ],
+              [
+                "session0",
+                "ue1",
+                "failure1"
+              ]
+            ]
+          },
+          "failure_indistinct": {
+            "holds": [
+              [
+                "session0"
+              ]
+            ],
+            "fails": []
+          },
+          "freshness_checked": {
+            "holds": [
+              [
+                "session0",
+                "nonce0"
+              ]
+            ],
+            "fails": []
+          },
+          "identifies": {
+            "holds": [],
+            "fails": [
+              [
+                "message0",
+                "ue0"
+              ],
+              [
+                "message0",
+                "ue1"
+              ]
+            ]
+          },
+          "encrypted_with_hn_key": {
+            "holds": [
+              [
+                "message0",
+                "hn0"
+              ]
+            ],
+            "fails": []
+          },
+          "derives_kausf": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "hn0",
+                "key0"
+              ]
+            ]
+          },
+          "forwards_res": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "sn0",
+                "message0"
+              ],
+              [
+                "session0",
+                "sn1",
+                "message0"
+              ]
+            ]
+          },
+          "nas_security_active": {
+            "holds": [],
+            "fails": [
+              [
+                "session0",
+                "ue0"
+              ],
+              [
+                "session0",
+                "ue1"
+              ]
+            ]
+          }
+        }
+      },
+      "unbounded": {
+        "verdict": "gate_rejected",
+        "elapsed_s": 0.0,
+        "detail": "tamarin gate: negated predicate 'key_bound_to' in a compiled trace property is not supported (would change the property's meaning); refusing"
+      },
+      "agreement": "tamarin_gate_rejected"
+    }
+  ],
+  "elapsed_s": 2.69
+}

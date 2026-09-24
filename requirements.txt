@@ -1,0 +1,7 @@
+# What `make reproduce` needs. Nothing else -- the six measurement scripts import
+# z3 and the standard library, so this file installs cleanly on CPython 3.11+.
+# (3.11 is the floor: datetime.UTC. Verified on 3.11, 3.12, 3.13 and 3.14.)
+#
+# The unbounded leg additionally needs the tamarin-prover 1.12.0 binary on PATH;
+# it is not a Python package. See https://tamarin-prover.com.
+z3-solver==4.12.4.0

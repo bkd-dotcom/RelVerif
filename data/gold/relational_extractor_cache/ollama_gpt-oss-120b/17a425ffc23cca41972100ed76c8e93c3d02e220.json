@@ -1,0 +1,1 @@
+{"rule_id": "REL25", "source_text": "A UE that has not verified the message authentication code shall not accept the authentication.", "premises": [{"name": "mac_verified", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "conclusions": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "notes": "", "meta": {}}

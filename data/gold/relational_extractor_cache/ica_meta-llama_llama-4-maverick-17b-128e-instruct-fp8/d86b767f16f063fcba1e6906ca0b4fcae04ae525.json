@@ -1,0 +1,1 @@
+{"rule_id": "REL06", "source_text": "Before accepting, the UE shall verify that the received sequence number is within the acceptable range.", "premises": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "conclusions": [{"name": "sqn_in_range", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

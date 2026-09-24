@@ -1,0 +1,32 @@
+theory FiveG_AKA_SQN_Replay
+begin
+
+builtins: natural-numbers
+functions: mac/2
+
+rule Setup:
+  [ Fr(~k) ] --[ Reg($UE) ]-> [ !LTK($UE, ~k), HN_Sqn($UE, %1), UE_Sqn($UE, %1) ]
+
+rule HN_Challenge:
+  [ HN_Sqn($UE, %sqn), !LTK($UE, ~k), Fr(~r) ]
+  --[ Challenge($UE, %sqn %+ %1), Tick() ]->
+  [ Out(<~r, %sqn %+ %1, mac(<~r, %sqn %+ %1>, ~k)>), HN_Sqn($UE, %sqn %+ %1) ]
+
+rule UE_Accept:
+  [ UE_Sqn($UE, %stored), !LTK($UE, ~k), In(<r, %recv, mac(<r, %recv>, ~k)>) ]
+  --[ Accept($UE, %recv), Fresh(%stored, %recv) ]->
+  [ UE_Sqn($UE, %recv) ]
+
+restriction freshness:
+  "All a b #i. Fresh(a, b) @ i ==> a ⊏ b"
+
+restriction reg_once:
+  "All ue #i #j. Reg(ue) @ i & Reg(ue) @ j ==> #i = #j"
+
+restriction at_most_two_ticks:
+  "All #a #b #c. Tick()@a & Tick()@b & Tick()@c ==> (#a=#b | #a=#c | #b=#c)"
+
+lemma replay_rejected [use_induction]:
+  "All ue x #i #j. Accept(ue, x) @ i & Accept(ue, x) @ j ==> #i = #j"
+
+end

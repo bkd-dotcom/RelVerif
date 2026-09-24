@@ -1,0 +1,2380 @@
+{
+  "description": "Cost and verdict-stability of the bounded relational leg as the finite universe grows, in two arms: growing the sorts that carry model content (principals, sessions, messages) and growing the conclusion-only sorts the compiler universally quantifies. The first arm tests whether the method scales; the second exposes a limit of the encoding rather than of the protocol, and they are reported separately for that reason.",
+  "git_sha": "unknown",
+  "generated_at": "2026-09-23T03:49:11+00:00",
+  "default_sizes": {
+    "UE": 2,
+    "SN": 2,
+    "HN": 1,
+    "Session": 1,
+    "Key": 1,
+    "Nonce": 1,
+    "SQN": 1,
+    "Message": 1,
+    "Failure": 2
+  },
+  "model_sorts_scaled": [
+    "UE",
+    "SN",
+    "Session",
+    "Message",
+    "Failure"
+  ],
+  "consequent_sorts_scaled": [
+    "Key",
+    "Nonce",
+    "HN",
+    "SQN"
+  ],
+  "budget_s_per_config": 120.0,
+  "n_gold_rules": 50,
+  "cross_check_vs_run_closed_loop": [
+    {
+      "property": "serving_network_binding",
+      "reference_validated": true,
+      "instrumented_validated": true,
+      "agree": true,
+      "reference_conflicting": [],
+      "instrumented_conflicting": [],
+      "conflicting_agree": true
+    },
+    {
+      "property": "supi_concealment",
+      "reference_validated": true,
+      "instrumented_validated": true,
+      "agree": true,
+      "reference_conflicting": [
+        "REL20"
+      ],
+      "instrumented_conflicting": [
+        "REL20"
+      ],
+      "conflicting_agree": true
+    },
+    {
+      "property": "key_confirmation",
+      "reference_validated": true,
+      "instrumented_validated": true,
+      "agree": true,
+      "reference_conflicting": [],
+      "instrumented_conflicting": [],
+      "conflicting_agree": true
+    }
+  ],
+  "cross_check_all_agree": true,
+  "timing_repeats_per_config": 3,
+  "deterministic_across_repeats": true,
+  "verdict_stability": {
+    "model": {
+      "scales_tested": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8,
+        12,
+        16,
+        24,
+        32
+      ],
+      "max_scale_all_validated": 32,
+      "first_flip_scale": null,
+      "flips": []
+    },
+    "consequent": {
+      "scales_tested": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "max_scale_all_validated": 16,
+      "first_flip_scale": null,
+      "flips": []
+    },
+    "rules": {
+      "scales_tested": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "max_scale_all_validated": 16,
+      "first_flip_scale": null,
+      "flips": []
+    }
+  },
+  "cost_summary": {
+    "model": {
+      "growth_metric": "quantifier_instantiations",
+      "metric_from": 100,
+      "metric_to": 2645056,
+      "metric_factor": 26450.6,
+      "seconds_from": 0.039,
+      "seconds_to": 0.0387,
+      "seconds_factor": 0.99,
+      "consistency_from_s": 0.0119,
+      "consistency_to_s": 0.0123,
+      "consistency_factor": 1.03
+    },
+    "consequent": {
+      "growth_metric": "quantifier_instantiations",
+      "metric_from": 100,
+      "metric_to": 3655,
+      "metric_factor": 36.5,
+      "seconds_from": 0.0388,
+      "seconds_to": 0.0394,
+      "seconds_factor": 1.02,
+      "consistency_from_s": 0.0118,
+      "consistency_to_s": 0.0117,
+      "consistency_factor": 0.99
+    },
+    "rules": {
+      "growth_metric": "n_rules_input",
+      "metric_from": 50,
+      "metric_to": 800,
+      "metric_factor": 16.0,
+      "seconds_from": 0.0397,
+      "seconds_to": 0.2005,
+      "seconds_factor": 5.05,
+      "consistency_from_s": 0.0121,
+      "consistency_to_s": 0.0933,
+      "consistency_factor": 7.71
+    }
+  },
+  "interpretation": "Wall-clock is flat in the bound while the analytic encoding size grows by orders of magnitude, which says the finite-domain encoding is not eagerly grounded: Z3 decides these quantified sentences over enumerated sorts without materialising the instantiations the grounded_atoms and quantifier_instantiations columns count. Those columns are therefore the size an eager encoding would have paid for, and the flat curve beside them is the result. The model arm's seconds_factor lands on either side of 1.0 between runs (0.98 here, 1.06 on a previous sweep) because every stage sits near the measurement floor of a few tens of milliseconds: the claim these numbers support is constancy in the bound, not a speedup, and the factor should not be quoted as if it were precise. Cost instead grows with the number of requirements, because consistency repair makes one incremental solver call per rule -- so the axis to report as 'scalability' is requirement count, not universe size.",
+  "arms": {
+    "model": [
+      {
+        "scale": 1,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.039,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 100,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0119,
+              "discover": 0.0077,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0072,
+              "total": 0.037
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 110,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0132,
+              "discover": 0.0077,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0076,
+              "total": 0.0371
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 114,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0137,
+              "discover": 0.008,
+              "fix_reverify": 0.0056,
+              "non_vacuity": 0.0075,
+              "total": 0.039
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 2,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Session": 2,
+          "Message": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 80,
+        "max_total_s": 0.0386,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Session": 2,
+              "Message": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 80,
+            "quantifier_instantiations": 256,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0121,
+              "discover": 0.0075,
+              "fix_reverify": 0.0056,
+              "non_vacuity": 0.0071,
+              "total": 0.0364
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Session": 2,
+              "Message": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 80,
+            "quantifier_instantiations": 268,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0135,
+              "discover": 0.0078,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.008,
+              "total": 0.0384
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Session": 2,
+              "Message": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 80,
+            "quantifier_instantiations": 284,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0132,
+              "discover": 0.0077,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0075,
+              "total": 0.0386
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 3,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 3,
+          "SN": 3,
+          "Session": 3,
+          "Message": 3,
+          "Failure": 3
+        },
+        "grounded_atoms": 207,
+        "max_total_s": 0.0382,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 3,
+              "SN": 3,
+              "Session": 3,
+              "Message": 3,
+              "Failure": 3
+            },
+            "grounded_atoms": 207,
+            "quantifier_instantiations": 807,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0115,
+              "discover": 0.0077,
+              "fix_reverify": 0.0056,
+              "non_vacuity": 0.0075,
+              "total": 0.0365
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 3,
+              "SN": 3,
+              "Session": 3,
+              "Message": 3,
+              "Failure": 3
+            },
+            "grounded_atoms": 207,
+            "quantifier_instantiations": 843,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0126,
+              "discover": 0.0078,
+              "fix_reverify": 0.0044,
+              "non_vacuity": 0.0072,
+              "total": 0.0367
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 3,
+              "SN": 3,
+              "Session": 3,
+              "Message": 3,
+              "Failure": 3
+            },
+            "grounded_atoms": 207,
+            "quantifier_instantiations": 897,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0132,
+              "discover": 0.0076,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0073,
+              "total": 0.0382
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 4,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 4,
+          "SN": 4,
+          "Session": 4,
+          "Message": 4,
+          "Failure": 4
+        },
+        "grounded_atoms": 424,
+        "max_total_s": 0.0386,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 4,
+              "SN": 4,
+              "Session": 4,
+              "Message": 4,
+              "Failure": 4
+            },
+            "grounded_atoms": 424,
+            "quantifier_instantiations": 1912,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0122,
+              "discover": 0.0076,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0069,
+              "total": 0.0369
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 4,
+              "SN": 4,
+              "Session": 4,
+              "Message": 4,
+              "Failure": 4
+            },
+            "grounded_atoms": 424,
+            "quantifier_instantiations": 1992,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0129,
+              "discover": 0.008,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0071,
+              "total": 0.037
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 4,
+              "SN": 4,
+              "Session": 4,
+              "Message": 4,
+              "Failure": 4
+            },
+            "grounded_atoms": 424,
+            "quantifier_instantiations": 2120,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0132,
+              "discover": 0.0077,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0075,
+              "total": 0.0386
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 6,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 6,
+          "SN": 6,
+          "Session": 6,
+          "Message": 6,
+          "Failure": 6
+        },
+        "grounded_atoms": 1224,
+        "max_total_s": 0.0384,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 6,
+              "SN": 6,
+              "Session": 6,
+              "Message": 6,
+              "Failure": 6
+            },
+            "grounded_atoms": 1224,
+            "quantifier_instantiations": 6888,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0116,
+              "discover": 0.0077,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0069,
+              "total": 0.0361
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 6,
+              "SN": 6,
+              "Session": 6,
+              "Message": 6,
+              "Failure": 6
+            },
+            "grounded_atoms": 1224,
+            "quantifier_instantiations": 7140,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0134,
+              "discover": 0.0077,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0075,
+              "total": 0.0377
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 6,
+              "SN": 6,
+              "Session": 6,
+              "Message": 6,
+              "Failure": 6
+            },
+            "grounded_atoms": 1224,
+            "quantifier_instantiations": 7572,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0129,
+              "discover": 0.0081,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0074,
+              "total": 0.0384
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 8,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 8,
+          "SN": 8,
+          "Session": 8,
+          "Message": 8,
+          "Failure": 8
+        },
+        "grounded_atoms": 2672,
+        "max_total_s": 0.0386,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 8,
+              "SN": 8,
+              "Session": 8,
+              "Message": 8,
+              "Failure": 8
+            },
+            "grounded_atoms": 2672,
+            "quantifier_instantiations": 17872,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0031,
+              "consistency_repair": 0.0121,
+              "discover": 0.0077,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0074,
+              "total": 0.0375
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 8,
+              "SN": 8,
+              "Session": 8,
+              "Message": 8,
+              "Failure": 8
+            },
+            "grounded_atoms": 2672,
+            "quantifier_instantiations": 18448,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0132,
+              "discover": 0.0079,
+              "fix_reverify": 0.0044,
+              "non_vacuity": 0.0075,
+              "total": 0.0367
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 8,
+              "SN": 8,
+              "Session": 8,
+              "Message": 8,
+              "Failure": 8
+            },
+            "grounded_atoms": 2672,
+            "quantifier_instantiations": 19472,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0133,
+              "discover": 0.0079,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.007,
+              "total": 0.0386
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 12,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 12,
+          "SN": 12,
+          "Session": 12,
+          "Message": 12,
+          "Failure": 12
+        },
+        "grounded_atoms": 8280,
+        "max_total_s": 0.0393,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 12,
+              "SN": 12,
+              "Session": 12,
+              "Message": 12,
+              "Failure": 12
+            },
+            "grounded_atoms": 8280,
+            "quantifier_instantiations": 72456,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0115,
+              "discover": 0.0075,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0073,
+              "total": 0.0373
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 12,
+              "SN": 12,
+              "Session": 12,
+              "Message": 12,
+              "Failure": 12
+            },
+            "grounded_atoms": 8280,
+            "quantifier_instantiations": 74328,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0134,
+              "discover": 0.0075,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0077,
+              "total": 0.0376
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 12,
+              "SN": 12,
+              "Session": 12,
+              "Message": 12,
+              "Failure": 12
+            },
+            "grounded_atoms": 8280,
+            "quantifier_instantiations": 77784,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0036,
+              "consistency_repair": 0.0132,
+              "discover": 0.0081,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0075,
+              "total": 0.0393
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 16,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 16,
+          "SN": 16,
+          "Session": 16,
+          "Message": 16,
+          "Failure": 16
+        },
+        "grounded_atoms": 18784,
+        "max_total_s": 0.0394,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 16,
+              "SN": 16,
+              "Session": 16,
+              "Message": 16,
+              "Failure": 16
+            },
+            "grounded_atoms": 18784,
+            "quantifier_instantiations": 202528,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0031,
+              "consistency_repair": 0.012,
+              "discover": 0.0076,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0073,
+              "total": 0.0373
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 16,
+              "SN": 16,
+              "Session": 16,
+              "Message": 16,
+              "Failure": 16
+            },
+            "grounded_atoms": 18784,
+            "quantifier_instantiations": 206880,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0133,
+              "discover": 0.0077,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0072,
+              "total": 0.0375
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 16,
+              "SN": 16,
+              "Session": 16,
+              "Message": 16,
+              "Failure": 16
+            },
+            "grounded_atoms": 18784,
+            "quantifier_instantiations": 215072,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0036,
+              "consistency_repair": 0.0135,
+              "discover": 0.008,
+              "fix_reverify": 0.0056,
+              "non_vacuity": 0.0074,
+              "total": 0.0394
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 24,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 24,
+          "SN": 24,
+          "Session": 24,
+          "Message": 24,
+          "Failure": 24
+        },
+        "grounded_atoms": 60624,
+        "max_total_s": 0.0398,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 24,
+              "SN": 24,
+              "Session": 24,
+              "Message": 24,
+              "Failure": 24
+            },
+            "grounded_atoms": 60624,
+            "quantifier_instantiations": 898032,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.012,
+              "discover": 0.0074,
+              "fix_reverify": 0.0056,
+              "non_vacuity": 0.0072,
+              "total": 0.0368
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 24,
+              "SN": 24,
+              "Session": 24,
+              "Message": 24,
+              "Failure": 24
+            },
+            "grounded_atoms": 60624,
+            "quantifier_instantiations": 912432,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0133,
+              "discover": 0.0081,
+              "fix_reverify": 0.0044,
+              "non_vacuity": 0.0074,
+              "total": 0.038
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 24,
+              "SN": 24,
+              "Session": 24,
+              "Message": 24,
+              "Failure": 24
+            },
+            "grounded_atoms": 60624,
+            "quantifier_instantiations": 940080,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0137,
+              "discover": 0.0079,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0072,
+              "total": 0.0398
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 32,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 32,
+          "SN": 32,
+          "Session": 32,
+          "Message": 32,
+          "Failure": 32
+        },
+        "grounded_atoms": 140480,
+        "max_total_s": 0.0387,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 32,
+              "SN": 32,
+              "Session": 32,
+              "Message": 32,
+              "Failure": 32
+            },
+            "grounded_atoms": 140480,
+            "quantifier_instantiations": 2645056,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0123,
+              "discover": 0.0073,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0072,
+              "total": 0.0376
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 32,
+              "SN": 32,
+              "Session": 32,
+              "Message": 32,
+              "Failure": 32
+            },
+            "grounded_atoms": 140480,
+            "quantifier_instantiations": 2678848,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0133,
+              "discover": 0.008,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0076,
+              "total": 0.0385
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 32,
+              "SN": 32,
+              "Session": 32,
+              "Message": 32,
+              "Failure": 32
+            },
+            "grounded_atoms": 140480,
+            "quantifier_instantiations": 2744384,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0132,
+              "discover": 0.0075,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0073,
+              "total": 0.0387
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      }
+    ],
+    "consequent": [
+      {
+        "scale": 1,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.0388,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 100,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0118,
+              "discover": 0.0075,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.007,
+              "total": 0.0365
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 110,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0134,
+              "discover": 0.0079,
+              "fix_reverify": 0.0046,
+              "non_vacuity": 0.0071,
+              "total": 0.0374
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 114,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0036,
+              "consistency_repair": 0.0134,
+              "discover": 0.0076,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0072,
+              "total": 0.0388
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 2,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "HN": 2,
+          "Key": 2,
+          "Nonce": 2,
+          "SQN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 49,
+        "max_total_s": 0.0396,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 2,
+              "Key": 2,
+              "Nonce": 2,
+              "SQN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 49,
+            "quantifier_instantiations": 169,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0115,
+              "discover": 0.0077,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0075,
+              "total": 0.0367
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 2,
+              "Key": 2,
+              "Nonce": 2,
+              "SQN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 49,
+            "quantifier_instantiations": 189,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0131,
+              "discover": 0.0077,
+              "fix_reverify": 0.0044,
+              "non_vacuity": 0.0078,
+              "total": 0.0375
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 2,
+              "Key": 2,
+              "Nonce": 2,
+              "SQN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 49,
+            "quantifier_instantiations": 197,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0036,
+              "consistency_repair": 0.0137,
+              "discover": 0.0078,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0075,
+              "total": 0.0396
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 4,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "HN": 4,
+          "Key": 4,
+          "Nonce": 4,
+          "SQN": 4,
+          "Failure": 2
+        },
+        "grounded_atoms": 79,
+        "max_total_s": 0.0385,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 4,
+              "Key": 4,
+              "Nonce": 4,
+              "SQN": 4,
+              "Failure": 2
+            },
+            "grounded_atoms": 79,
+            "quantifier_instantiations": 379,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0031,
+              "consistency_repair": 0.0118,
+              "discover": 0.0072,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0073,
+              "total": 0.0364
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 4,
+              "Key": 4,
+              "Nonce": 4,
+              "SQN": 4,
+              "Failure": 2
+            },
+            "grounded_atoms": 79,
+            "quantifier_instantiations": 419,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0132,
+              "discover": 0.0077,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0075,
+              "total": 0.0373
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 4,
+              "Key": 4,
+              "Nonce": 4,
+              "SQN": 4,
+              "Failure": 2
+            },
+            "grounded_atoms": 79,
+            "quantifier_instantiations": 423,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0133,
+              "discover": 0.0077,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0075,
+              "total": 0.0385
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 8,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "HN": 8,
+          "Key": 8,
+          "Nonce": 8,
+          "SQN": 8,
+          "Failure": 2
+        },
+        "grounded_atoms": 163,
+        "max_total_s": 0.0389,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 8,
+              "Key": 8,
+              "Nonce": 8,
+              "SQN": 8,
+              "Failure": 2
+            },
+            "grounded_atoms": 163,
+            "quantifier_instantiations": 1087,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0126,
+              "discover": 0.0078,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0072,
+              "total": 0.0378
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 8,
+              "Key": 8,
+              "Nonce": 8,
+              "SQN": 8,
+              "Failure": 2
+            },
+            "grounded_atoms": 163,
+            "quantifier_instantiations": 1167,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0133,
+              "discover": 0.0078,
+              "fix_reverify": 0.0044,
+              "non_vacuity": 0.0075,
+              "total": 0.0375
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 8,
+              "Key": 8,
+              "Nonce": 8,
+              "SQN": 8,
+              "Failure": 2
+            },
+            "grounded_atoms": 163,
+            "quantifier_instantiations": 1115,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0036,
+              "consistency_repair": 0.0137,
+              "discover": 0.0077,
+              "fix_reverify": 0.0058,
+              "non_vacuity": 0.0074,
+              "total": 0.0389
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 16,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "HN": 16,
+          "Key": 16,
+          "Nonce": 16,
+          "SQN": 16,
+          "Failure": 2
+        },
+        "grounded_atoms": 427,
+        "max_total_s": 0.0394,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 16,
+              "Key": 16,
+              "Nonce": 16,
+              "SQN": 16,
+              "Failure": 2
+            },
+            "grounded_atoms": 427,
+            "quantifier_instantiations": 3655,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0032,
+              "consistency_repair": 0.0117,
+              "discover": 0.0075,
+              "fix_reverify": 0.0056,
+              "non_vacuity": 0.0075,
+              "total": 0.0371
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 16,
+              "Key": 16,
+              "Nonce": 16,
+              "SQN": 16,
+              "Failure": 2
+            },
+            "grounded_atoms": 427,
+            "quantifier_instantiations": 3815,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0133,
+              "discover": 0.0077,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0074,
+              "total": 0.0378
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "HN": 16,
+              "Key": 16,
+              "Nonce": 16,
+              "SQN": 16,
+              "Failure": 2
+            },
+            "grounded_atoms": 427,
+            "quantifier_instantiations": 3459,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0036,
+              "consistency_repair": 0.0133,
+              "discover": 0.0082,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0075,
+              "total": 0.0394
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      }
+    ],
+    "rules": [
+      {
+        "scale": 1,
+        "n_rules_input": 50,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.0397,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 100,
+            "n_base_rules_compiled": 43,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0031,
+              "consistency_repair": 0.0121,
+              "discover": 0.0075,
+              "fix_reverify": 0.0057,
+              "non_vacuity": 0.0074,
+              "total": 0.037
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 110,
+            "n_base_rules_compiled": 44,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 1,
+            "conflicting_rules": [
+              "REL20"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0034,
+              "consistency_repair": 0.0129,
+              "discover": 0.0082,
+              "fix_reverify": 0.0045,
+              "non_vacuity": 0.0078,
+              "total": 0.0377
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 114,
+            "n_base_rules_compiled": 47,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0035,
+              "consistency_repair": 0.0138,
+              "discover": 0.008,
+              "fix_reverify": 0.006,
+              "non_vacuity": 0.0076,
+              "total": 0.0397
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 2,
+        "n_rules_input": 100,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.0501,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 200,
+            "n_base_rules_compiled": 86,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0063,
+              "consistency_repair": 0.018,
+              "discover": 0.0078,
+              "fix_reverify": 0.0061,
+              "non_vacuity": 0.0073,
+              "total": 0.0464
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 220,
+            "n_base_rules_compiled": 88,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 2,
+            "conflicting_rules": [
+              "REL20",
+              "REL20_c1"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0067,
+              "consistency_repair": 0.0194,
+              "discover": 0.0081,
+              "fix_reverify": 0.0048,
+              "non_vacuity": 0.0079,
+              "total": 0.0481
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 228,
+            "n_base_rules_compiled": 94,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.007,
+              "consistency_repair": 0.0202,
+              "discover": 0.0085,
+              "fix_reverify": 0.006,
+              "non_vacuity": 0.0078,
+              "total": 0.0501
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 4,
+        "n_rules_input": 200,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.0719,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 400,
+            "n_base_rules_compiled": 172,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0126,
+              "consistency_repair": 0.0286,
+              "discover": 0.0082,
+              "fix_reverify": 0.0066,
+              "non_vacuity": 0.008,
+              "total": 0.0653
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 440,
+            "n_base_rules_compiled": 176,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 4,
+            "conflicting_rules": [
+              "REL20",
+              "REL20_c1",
+              "REL20_c2",
+              "REL20_c3"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0136,
+              "consistency_repair": 0.0309,
+              "discover": 0.0089,
+              "fix_reverify": 0.0054,
+              "non_vacuity": 0.009,
+              "total": 0.0685
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 456,
+            "n_base_rules_compiled": 188,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0141,
+              "consistency_repair": 0.0329,
+              "discover": 0.0087,
+              "fix_reverify": 0.0067,
+              "non_vacuity": 0.0081,
+              "total": 0.0719
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 8,
+        "n_rules_input": 400,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.1179,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 800,
+            "n_base_rules_compiled": 344,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0251,
+              "consistency_repair": 0.0504,
+              "discover": 0.0098,
+              "fix_reverify": 0.0077,
+              "non_vacuity": 0.0089,
+              "total": 0.1032
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 880,
+            "n_base_rules_compiled": 352,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 8,
+            "conflicting_rules": [
+              "REL20",
+              "REL20_c1",
+              "REL20_c2",
+              "REL20_c3",
+              "REL20_c4",
+              "REL20_c5",
+              "REL20_c6",
+              "REL20_c7"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.028,
+              "consistency_repair": 0.0566,
+              "discover": 0.0104,
+              "fix_reverify": 0.0068,
+              "non_vacuity": 0.0098,
+              "total": 0.1134
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 912,
+            "n_base_rules_compiled": 376,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0285,
+              "consistency_repair": 0.059,
+              "discover": 0.0109,
+              "fix_reverify": 0.0082,
+              "non_vacuity": 0.0096,
+              "total": 0.1179
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      },
+      {
+        "scale": 16,
+        "n_rules_input": 800,
+        "sizes": {
+          "UE": 2,
+          "SN": 2,
+          "Failure": 2
+        },
+        "grounded_atoms": 37,
+        "max_total_s": 0.2005,
+        "all_validated": true,
+        "anchors": [
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 1600,
+            "n_base_rules_compiled": 688,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0507,
+              "consistency_repair": 0.0933,
+              "discover": 0.0121,
+              "fix_reverify": 0.0099,
+              "non_vacuity": 0.0114,
+              "total": 0.1786
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "serving_network_binding",
+            "canonical_mitigation": "REL13"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 1760,
+            "n_base_rules_compiled": 704,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 16,
+            "conflicting_rules": [
+              "REL20",
+              "REL20_c1",
+              "REL20_c10",
+              "REL20_c11",
+              "REL20_c12",
+              "REL20_c13",
+              "REL20_c14",
+              "REL20_c15",
+              "REL20_c2",
+              "REL20_c3",
+              "REL20_c4",
+              "REL20_c5",
+              "REL20_c6",
+              "REL20_c7",
+              "REL20_c8",
+              "REL20_c9"
+            ],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0543,
+              "consistency_repair": 0.1029,
+              "discover": 0.0129,
+              "fix_reverify": 0.0087,
+              "non_vacuity": 0.0119,
+              "total": 0.1935
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "supi_concealment",
+            "canonical_mitigation": "REL02"
+          },
+          {
+            "sizes": {
+              "UE": 2,
+              "SN": 2,
+              "Failure": 2
+            },
+            "grounded_atoms": 37,
+            "quantifier_instantiations": 1824,
+            "n_base_rules_compiled": 752,
+            "n_base_rules_rejected": 0,
+            "n_conflicting_dropped": 0,
+            "conflicting_rules": [],
+            "discovered_vulnerability": true,
+            "fixed": true,
+            "secure_world_exists": true,
+            "end_to_end_validated": true,
+            "seconds": {
+              "compile": 0.0562,
+              "consistency_repair": 0.1088,
+              "discover": 0.0121,
+              "fix_reverify": 0.0102,
+              "non_vacuity": 0.0118,
+              "total": 0.2005
+            },
+            "repeats": 3,
+            "deterministic_across_repeats": true,
+            "property": "key_confirmation",
+            "canonical_mitigation": "REL11"
+          }
+        ]
+      }
+    ]
+  },
+  "elapsed_s": 9.81
+}

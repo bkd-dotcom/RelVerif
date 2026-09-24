@@ -1,0 +1,25 @@
+{
+  "capabilities": [
+    "intercept: the attacker learns every message sent on the network (Dolev-Yao network control)",
+    "decompose: knows(cipher) \u2227 encrypts(cipher,key,plain) \u2227 knows_key(key) \u21d2 knows(plain)",
+    "compose: knows_key(key) \u2227 knows(plain) \u2227 encrypts(cipher,key,plain) \u21d2 knows(cipher) (re-encrypt)",
+    "key_secrecy: knows_key(key) \u21d2 given_key(key): keys are unforgeable (the crypto assumption)",
+    "replay: a known message can be re-injected into any session (sent in a new session)"
+  ],
+  "decompose": {
+    "secret_safe_without_key": true,
+    "secret_leaks_with_key": true,
+    "detail_no_key": "secret NOT derivable \u2014 decompose is gated by key knowledge (secrecy holds)",
+    "detail_with_key": "attacker derives the plaintext secret by decomposing the intercepted ciphertext with the leaked key"
+  },
+  "replay": {
+    "attack_without_freshness": true,
+    "blocked_with_freshness": true,
+    "legitimate_accept_still_holds": true,
+    "detail_base": "replayed message accepted in a new session \u2014 no freshness binding",
+    "detail_fixed": "replay rejected \u2014 acceptance requires a session-fresh nonce the replay lacks"
+  },
+  "decompose_capability_validated": true,
+  "replay_mitigation_validated": true,
+  "scope": "Bounded relational Dolev-Yao adversary: composable capabilities (intercept / decompose / compose / key-secrecy / replay) over an explicit knows() relation. Derivability uses the sound entailment reading (knows(X) iff negation UNSAT). Demonstrates: (a) decompose leaks a secret ONLY when the key is known; (b) a cross-session replay is accepted without freshness and blocked with it, while a legitimate fresh message is still accepted. Bounded, not an unbounded proof."
+}

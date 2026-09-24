@@ -1,0 +1,1 @@
+{"rule_id": "REL01", "source_text": "During registration the UE shall send the concealed identifier SUCI rather than the permanent identifier SUPI, so the subscriber's permanent identity is not exposed.", "premises": [], "conclusions": [{"name": "conceals_supi", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

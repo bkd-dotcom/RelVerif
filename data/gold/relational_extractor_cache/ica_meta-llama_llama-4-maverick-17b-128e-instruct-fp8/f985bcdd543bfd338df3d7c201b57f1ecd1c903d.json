@@ -1,0 +1,1 @@
+{"rule_id": "REL28", "source_text": "NAS security is activated for the UE only after the UE has accepted the authentication.", "premises": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "conclusions": [{"name": "nas_security_active", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

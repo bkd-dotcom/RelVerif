@@ -1,0 +1,1 @@
+{"rule_id": "REL30", "source_text": "The home network derives the KAUSF only if the serving network is authorized.", "premises": [{"name": "derives_kausf", "args": ["s", "h", "k"], "sorts": ["Session", "HN", "Key"], "negated": false}], "conclusions": [{"name": "authorized_by_hn", "args": ["sn", "h"], "sorts": ["SN", "HN"], "negated": false}], "notes": "", "meta": {}}

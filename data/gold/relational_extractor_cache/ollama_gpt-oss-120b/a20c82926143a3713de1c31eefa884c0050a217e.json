@@ -1,0 +1,1 @@
+{"rule_id": "REL36", "source_text": "The home network does not derive the KAUSF if the message authentication code is invalid.", "premises": [{"name": "mac_verified", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "conclusions": [{"name": "derives_kausf", "args": ["s", "h", "k"], "sorts": ["Session", "HN", "Key"], "negated": true}], "notes": "", "meta": {}}

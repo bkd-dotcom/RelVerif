@@ -1,0 +1,33 @@
+theory FiveG_AKA_SNBinding_Base
+begin
+
+functions: mac/2, kdf/2
+
+// R-LTK: UE and home network share a long-term key (unbounded UEs).
+rule Register_LTK:
+  [ Fr(~k) ] --> [ !LTK($UE, ~k) ]
+
+// Network side issues a challenge for $UE via serving network $SN.
+rule SN_Challenge:
+  [ !LTK($UE, ~k), Fr(~r) ]
+  --[ Running($UE, $SN, kdf(~k, ~r)) ]->
+  [ Out(<$SN, ~r, mac(~r, ~k)>) ]
+
+// UE side verifies the MAC and accepts (R2/R3/R6), committing to the SN
+// named in the message.
+rule UE_Accept:
+  [ !LTK($UE, ~k), In(<sn, r, mac(r, ~k)>) ]
+  --[ Commit($UE, sn, kdf(~k, r)) ]->
+  []
+
+// Sanity: an honest run exists (non-vacuity of the fix).
+lemma executable: exists-trace
+  "Ex ue sn key #i #j. Running(ue, sn, key) @ i & Commit(ue, sn, key) @ j"
+
+// NDSS'19 SN-binding property: if a UE commits to a key with sn, the
+// network side ran a session with that UE, that sn, and that key.
+lemma sn_binding:
+  "All ue sn key #i. Commit(ue, sn, key) @ i
+     ==> Ex #j. Running(ue, sn, key) @ j"
+
+end

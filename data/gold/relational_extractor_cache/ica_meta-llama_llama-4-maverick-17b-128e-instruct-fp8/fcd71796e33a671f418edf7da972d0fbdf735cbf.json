@@ -1,0 +1,1 @@
+{"rule_id": "REL31", "source_text": "A UE accepts the authentication only if it has computed the response RES*.", "premises": [{"name": "computes_res", "args": ["s", "u", "m"], "sorts": ["Session", "UE", "Message"], "negated": false}], "conclusions": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

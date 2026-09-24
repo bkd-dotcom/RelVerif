@@ -1,0 +1,1 @@
+{"rule_id": "REL37", "source_text": "A UE accepts the authentication only if its sequence number is in the acceptable range.", "premises": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "conclusions": [{"name": "sqn_in_range", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

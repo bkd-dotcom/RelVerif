@@ -1,0 +1,1 @@
+{"rule_id": "REL14", "source_text": "The random challenge RAND provides freshness for the authentication and shall be checked by the UE.", "premises": [], "conclusions": [{"name": "freshness_checked", "args": ["s", "rand"], "sorts": ["Session", "Nonce"], "negated": false}], "notes": "", "meta": {}}

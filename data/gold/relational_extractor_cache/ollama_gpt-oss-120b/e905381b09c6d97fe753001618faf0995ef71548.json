@@ -1,0 +1,1 @@
+{"rule_id": "REL29", "source_text": "If the UE has not accepted the authentication, NAS security shall not be active for it.", "premises": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "conclusions": [{"name": "nas_security_active", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "notes": "", "meta": {}}

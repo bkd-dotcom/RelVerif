@@ -1,0 +1,1 @@
+{"rule_id": "REL09", "source_text": "To prevent an attacker from linking a subscriber across sessions, authentication failure messages shall be made indistinguishable to an eavesdropper.", "premises": [], "conclusions": [{"name": "failure_indistinct", "args": ["s"], "sorts": ["Session"], "negated": false}], "notes": "", "meta": {}}

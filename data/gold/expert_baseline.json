@@ -1,0 +1,283 @@
+{
+  "description": "A hand-written Tamarin theory pair and an AST-compiled one for the same NDSS'19 serving-network-binding property and the same protocol-level fix, compared on outcome (is the attack found and the fix validated?) and on cost (code lines, action facts, proof steps, prover wall-clock). The two lemmas are NOT interderivable -- the expert uses the standard agreement idiom and the generated theory must phrase the requirement in the controlled vocabulary -- so this measures modelling effort and outcome, not logical equivalence.",
+  "git_sha": "unknown",
+  "generated_at": "2026-09-23T03:49:13+00:00",
+  "tamarin_timeout_s": 120,
+  "repeats_per_theory": 3,
+  "outcome": {
+    "expert": {
+      "base_property": {
+        "lemma": "sn_binding",
+        "verdict": "falsified",
+        "steps": 5
+      },
+      "fixed_property": {
+        "lemma": "sn_binding",
+        "verdict": "verified",
+        "steps": 5
+      },
+      "base_falsified": true,
+      "fixed_verified": true,
+      "fixed_non_vacuous": true,
+      "attack_found_and_fix_validated": true
+    },
+    "generated": {
+      "base_property": {
+        "lemma": "sn_binding",
+        "verdict": "falsified",
+        "steps": 6
+      },
+      "fixed_property": {
+        "lemma": "sn_binding",
+        "verdict": "verified",
+        "steps": 2
+      },
+      "base_falsified": true,
+      "fixed_verified": true,
+      "fixed_non_vacuous": true,
+      "attack_found_and_fix_validated": true
+    },
+    "same_outcome": true,
+    "both_succeed": true
+  },
+  "cost": {
+    "expert": {
+      "code_lines": 38,
+      "code_lines_expert_declared": 26,
+      "code_lines_lemmas": 12,
+      "n_action_facts": 2,
+      "proof_steps": 22,
+      "prove_s_median": 0.391
+    },
+    "generated": {
+      "code_lines": 42,
+      "code_lines_expert_declared": 26,
+      "code_lines_lemmas": 16,
+      "n_action_facts": 3,
+      "proof_steps": 22,
+      "prove_s_median": 0.41
+    },
+    "generated_vs_expert_code_lines": 1.11,
+    "generated_vs_expert_proof_steps": 1.0,
+    "generated_vs_expert_prove_s": 1.05
+  },
+  "automation_scope": {
+    "note": "In both authorships the multiset-rewrite rules are a declared expert input: the pipeline emits the lemma, not the protocol model. This fraction is therefore the part of the unbounded artifact that automation does not produce, and it bounds what 'from prose to proof' can mean here.",
+    "expert_declared_fraction_of_generated_theory": 0.619,
+    "generated_lemma_code_lines": 16,
+    "declared_skeleton_code_lines": 26
+  },
+  "theories": [
+    {
+      "authorship": "expert",
+      "variant": "base",
+      "structure": {
+        "file": "data/gold/tamarin_theories/snbinding_handwritten_base.spthy",
+        "bytes": 994,
+        "lines_total": 33,
+        "code_lines_total": 19,
+        "code_lines_rules_block": 13,
+        "code_lines_lemma_block": 6,
+        "expert_declared_fraction_of_code": 0.684,
+        "n_rewrite_rules": 3,
+        "n_lemmas": 2,
+        "lemmas": [
+          "executable",
+          "sn_binding"
+        ],
+        "action_facts": [
+          "Commit",
+          "Running"
+        ],
+        "n_action_facts": 2
+      },
+      "proof": {
+        "lemmas": {
+          "executable": {
+            "verdict": "verified",
+            "steps": 6
+          },
+          "sn_binding": {
+            "verdict": "falsified",
+            "steps": 5
+          }
+        },
+        "wall_clock_s": {
+          "median": 0.201,
+          "min": 0.198,
+          "max": 0.212,
+          "repeats": 3
+        },
+        "total_steps": 11
+      },
+      "property_lemma": {
+        "lemma": "sn_binding",
+        "verdict": "falsified",
+        "steps": 5
+      },
+      "executable": {
+        "verdict": "verified",
+        "steps": 6
+      }
+    },
+    {
+      "authorship": "expert",
+      "variant": "fixed",
+      "structure": {
+        "file": "data/gold/tamarin_theories/snbinding_handwritten_fixed.spthy",
+        "bytes": 1021,
+        "lines_total": 33,
+        "code_lines_total": 19,
+        "code_lines_rules_block": 13,
+        "code_lines_lemma_block": 6,
+        "expert_declared_fraction_of_code": 0.684,
+        "n_rewrite_rules": 3,
+        "n_lemmas": 2,
+        "lemmas": [
+          "executable",
+          "sn_binding"
+        ],
+        "action_facts": [
+          "Commit",
+          "Running"
+        ],
+        "n_action_facts": 2
+      },
+      "proof": {
+        "lemmas": {
+          "executable": {
+            "verdict": "verified",
+            "steps": 6
+          },
+          "sn_binding": {
+            "verdict": "verified",
+            "steps": 5
+          }
+        },
+        "wall_clock_s": {
+          "median": 0.19,
+          "min": 0.187,
+          "max": 0.2,
+          "repeats": 3
+        },
+        "total_steps": 11
+      },
+      "property_lemma": {
+        "lemma": "sn_binding",
+        "verdict": "verified",
+        "steps": 5
+      },
+      "executable": {
+        "verdict": "verified",
+        "steps": 6
+      }
+    },
+    {
+      "authorship": "generated",
+      "variant": "base",
+      "structure": {
+        "file": "data/gold/tamarin_theories/snbinding_generated_base.spthy",
+        "bytes": 1079,
+        "lines_total": 33,
+        "code_lines_total": 21,
+        "code_lines_rules_block": 13,
+        "code_lines_lemma_block": 8,
+        "expert_declared_fraction_of_code": 0.619,
+        "n_rewrite_rules": 3,
+        "n_lemmas": 2,
+        "lemmas": [
+          "executable",
+          "sn_binding"
+        ],
+        "action_facts": [
+          "Accepts",
+          "AuthenticatedWith",
+          "KeyBoundTo"
+        ],
+        "n_action_facts": 3
+      },
+      "proof": {
+        "lemmas": {
+          "executable": {
+            "verdict": "verified",
+            "steps": 7
+          },
+          "sn_binding": {
+            "verdict": "falsified",
+            "steps": 6
+          }
+        },
+        "wall_clock_s": {
+          "median": 0.206,
+          "min": 0.196,
+          "max": 0.208,
+          "repeats": 3
+        },
+        "total_steps": 13
+      },
+      "property_lemma": {
+        "lemma": "sn_binding",
+        "verdict": "falsified",
+        "steps": 6
+      },
+      "executable": {
+        "verdict": "verified",
+        "steps": 7
+      }
+    },
+    {
+      "authorship": "generated",
+      "variant": "fixed",
+      "structure": {
+        "file": "data/gold/tamarin_theories/snbinding_generated_fixed.spthy",
+        "bytes": 1014,
+        "lines_total": 32,
+        "code_lines_total": 21,
+        "code_lines_rules_block": 13,
+        "code_lines_lemma_block": 8,
+        "expert_declared_fraction_of_code": 0.619,
+        "n_rewrite_rules": 3,
+        "n_lemmas": 2,
+        "lemmas": [
+          "executable",
+          "sn_binding"
+        ],
+        "action_facts": [
+          "Accepts",
+          "AuthenticatedWith",
+          "KeyBoundTo"
+        ],
+        "n_action_facts": 3
+      },
+      "proof": {
+        "lemmas": {
+          "executable": {
+            "verdict": "verified",
+            "steps": 7
+          },
+          "sn_binding": {
+            "verdict": "verified",
+            "steps": 2
+          }
+        },
+        "wall_clock_s": {
+          "median": 0.204,
+          "min": 0.203,
+          "max": 0.21,
+          "repeats": 3
+        },
+        "total_steps": 9
+      },
+      "property_lemma": {
+        "lemma": "sn_binding",
+        "verdict": "verified",
+        "steps": 2
+      },
+      "executable": {
+        "verdict": "verified",
+        "steps": 7
+      }
+    }
+  ],
+  "elapsed_s": 2.44
+}

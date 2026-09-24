@@ -1,0 +1,13 @@
+# What `make test` needs, on top of requirements.txt.
+#
+# numpy and scipy are reached from exactly one module, src/evaluation/significance.py
+# (the bootstrap CI and rank tests behind the Table II scorer), which is imported only
+# by tests/test_relational_eval.py. The measurement scripts never touch them.
+#
+# These two pins are what the shipped numbers were produced with, and scipy 1.18
+# declares Requires-Python >= 3.12 -- so `make test` has a 3.12 floor while
+# `make reproduce` runs on 3.11. Nothing here affects a measured value: bootstrap_ci
+# seeds np.random.default_rng(0) explicitly.
+pytest==8.4.1
+numpy==2.4.4
+scipy==1.18.0

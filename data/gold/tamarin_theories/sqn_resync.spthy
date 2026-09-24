@@ -1,0 +1,35 @@
+theory FiveG_AKA_SQN_Resync
+begin
+
+functions: s/1
+
+rule Setup:
+  [ ] --[ Reg($UE) ]-> [ HN_Sqn($UE, 'z'), UE_Sqn($UE, 'z') ]
+
+rule HN_Challenge:
+  [ HN_Sqn($UE, x) ] --[ Tick() ]-> [ !Challenge($UE, s(x)), HN_Sqn($UE, s(x)) ]
+
+rule UE_Accept:
+  [ UE_Sqn($UE, x), !Challenge($UE, s(x)) ] --[ Accept($UE, s(x)) ]-> [ UE_Sqn($UE, s(x)) ]
+
+rule UE_Reject_Stale:
+  [ UE_Sqn($UE, x), !Challenge($UE, x) ]
+  --[ SyncFail($UE, x) ]->
+  [ Auts($UE, x), UE_Pending($UE, x) ]
+
+rule HN_Resync:
+  [ HN_Sqn($UE, y), Auts($UE, x) ] --[ Resync($UE, x) ]-> [ HN_Sqn($UE, x) ]
+
+rule UE_Resume:
+  [ UE_Pending($UE, x), !Challenge($UE, s(x)) ] --[ Resumed($UE, s(x)) ]-> [ UE_Sqn($UE, s(x)) ]
+
+restriction reg_once:
+  "All ue #i #j. Reg(ue) @ i & Reg(ue) @ j ==> #i = #j"
+
+restriction at_most_two_ticks:
+  "All #a #b #c. Tick()@a & Tick()@b & Tick()@c ==> (#a=#b | #a=#c | #b=#c)"
+
+lemma resync_recovers: exists-trace
+  "Ex ue x #i #j #k. SyncFail(ue,x)@i & Resync(ue,x)@j & Resumed(ue,s(x))@k & #i<#j & #j<#k"
+
+end

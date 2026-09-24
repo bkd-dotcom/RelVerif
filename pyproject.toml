@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "relverif"
+version = "1.0.0"
+description = "Typed relational representation with bounded Z3 and unbounded Tamarin backends for 5G-AKA"
+requires-python = ">=3.11"
+dependencies = [
+  "z3-solver==4.12.4.0",
+]
+
+[project.optional-dependencies]
+# `make test` only; scipy 1.18 raises the floor to 3.12 for this extra alone.
+test = [
+  "pytest==8.4.1",
+  "numpy==2.4.4",
+  "scipy==1.18.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+pythonpath = ["src"]
+testpaths = ["tests"]

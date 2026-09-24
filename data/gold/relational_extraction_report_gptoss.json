@@ -1,0 +1,521 @@
+{
+  "model": "ollama:gpt-oss:120b",
+  "gold_file": "data/gold/relational_gold.jsonl",
+  "n": 50,
+  "micro_precision": 0.9712,
+  "micro_recall": 1.0,
+  "micro_f1": 0.9854,
+  "macro_f1": 0.9891,
+  "macro_f1_bootstrap_ci": [
+    0.9891,
+    0.9754,
+    1.0
+  ],
+  "name_only_micro_f1": 0.9854,
+  "exact_match_rate": 0.84,
+  "directionality_swap_rate": 0.1,
+  "total_polarity_errors": 0,
+  "n_predicted_empty": 0,
+  "per_rule": [
+    {
+      "rule_id": "REL01",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL02",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL03",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL04",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL05",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL06",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL07",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL08",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL09",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL10",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL11",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL12",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL13",
+      "precision": 0.667,
+      "recall": 1.0,
+      "f1": 0.8,
+      "exact_match": false,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL14",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL15",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL16",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL17",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL18",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL19",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL20",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL21",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL22",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": false,
+      "directionality_swapped": true,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL23",
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.857,
+      "exact_match": false,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL24",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": false,
+      "directionality_swapped": true,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL25",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL26",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": false,
+      "directionality_swapped": true,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL27",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": false,
+      "directionality_swapped": true,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL28",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL29",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL30",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL31",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL32",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL33",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL34",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL35",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL36",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL37",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL38",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL39",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL40",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL41",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL42",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL43",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL44",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": false,
+      "directionality_swapped": true,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL45",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL46",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL47",
+      "precision": 0.667,
+      "recall": 1.0,
+      "f1": 0.8,
+      "exact_match": false,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL48",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL49",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    },
+    {
+      "rule_id": "REL50",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_match": true,
+      "directionality_swapped": false,
+      "polarity_errors": 0,
+      "predicted_empty": false
+    }
+  ]
+}

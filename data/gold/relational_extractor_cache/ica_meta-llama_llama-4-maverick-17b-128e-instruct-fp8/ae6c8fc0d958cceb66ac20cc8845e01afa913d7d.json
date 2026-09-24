@@ -1,0 +1,1 @@
+{"rule_id": "REL43", "source_text": "If a message identifies the subscriber, it is not encrypted with the home network public key.", "premises": [{"name": "identifies", "args": ["m", "u"], "sorts": ["Message", "UE"], "negated": false}], "conclusions": [{"name": "encrypted_with_hn_key", "args": ["m", "h"], "sorts": ["Message", "HN"], "negated": true}], "notes": "", "meta": {}}

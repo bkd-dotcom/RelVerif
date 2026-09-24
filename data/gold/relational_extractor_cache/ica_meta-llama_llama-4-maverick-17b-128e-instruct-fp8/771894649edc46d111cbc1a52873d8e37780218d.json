@@ -1,0 +1,1 @@
+{"rule_id": "REL46", "source_text": "NAS security is not activated for a UE that has not verified the message authentication code.", "premises": [{"name": "mac_verified", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "conclusions": [{"name": "nas_security_active", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": true}], "notes": "", "meta": {}}

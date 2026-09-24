@@ -1,0 +1,1 @@
+{"rule_id": "REL39", "source_text": "If NAS security is active for the UE, then the UE has accepted the authentication.", "premises": [{"name": "nas_security_active", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "conclusions": [{"name": "accepts", "args": ["s", "u"], "sorts": ["Session", "UE"], "negated": false}], "notes": "", "meta": {}}

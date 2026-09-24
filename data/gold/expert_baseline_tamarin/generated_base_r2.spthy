@@ -1,0 +1,33 @@
+theory FiveG_AKA_SNBinding_AST_Base
+begin
+
+functions: mac/2, kdf/2
+
+// UE and home network share a long-term key (unbounded UEs).
+rule Register_LTK:
+  [ Fr(~k) ] --> [ !LTK($UE, ~k) ]
+
+// Network issues a challenge for $UE via serving network $SN. Session identity is the
+// derived key term. BASE: neither the MAC nor the KDF covers $SN.
+rule SN_Challenge:
+  [ !LTK($UE, ~k), Fr(~r) ]
+  --[ AuthenticatedWith(kdf(~k, ~r), $UE, $SN) ]->
+  [ Out(<$SN, ~r, mac(~r, ~k)>) ]
+
+// UE verifies the MAC and accepts, binding the key to the (unauthenticated) SN name it
+// received -- which a Dolev-Yao attacker may have rewritten.
+rule UE_Accept:
+  [ !LTK($UE, ~k), In(<sn, r, mac(r, ~k)>) ]
+  --[ Accepts(kdf(~k, r), $UE), KeyBoundTo(kdf(~k, r), kdf(~k, r), sn) ]->
+  [ ]
+
+lemma executable: exists-trace
+  "Ex key n s u #e0 #e1 #e2. Accepts(s, u) @ #e0 & AuthenticatedWith(s, u, n) @ #e1 & KeyBoundTo(s, key, n) @ #e2"
+
+lemma sn_binding:
+  "All n s u #i0 #i1.
+     ( Accepts(s, u) @ #i0 & AuthenticatedWith(s, u, n) @ #i1 )
+    ==>
+     ( Ex key #j0. KeyBoundTo(s, key, n) @ #j0 )"
+
+end

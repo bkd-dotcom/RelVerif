@@ -1,0 +1,40 @@
+theory FiveG_AKA_SQN_Linkability_Base
+begin
+
+builtins: natural-numbers, symmetric-encryption
+functions: mac/2
+
+rule Setup:
+  [ Fr(~k) ] --[ Reg($UE) ]-> [ !LTK($UE, ~k), HN_Sqn($UE, %1), UE_Sqn($UE, %1) ]
+
+rule HN_Challenge:
+  [ HN_Sqn($UE, %sqn), !LTK($UE, ~k), Fr(~r) ]
+  --[ Challenge($UE, %sqn %+ %1), Step() ]->
+  [ Out(<~r, %sqn %+ %1, mac(<~r, %sqn %+ %1>, ~k)>), HN_Sqn($UE, %sqn %+ %1) ]
+
+rule UE_Accept:
+  [ UE_Sqn($UE, %stored), !LTK($UE, ~k), In(<r, %recv, mac(<r, %recv>, ~k)>) ]
+  --[ Accept($UE, %recv), Fresh(%stored, %recv), Step() ]->
+  [ UE_Sqn($UE, %recv) ]
+
+rule UE_Fail_StaleSqn:
+  [ UE_Sqn($UE, %stored), !LTK($UE, ~k), In(<r, %recv, mac(<r, %recv>, ~k)>) ]
+  --[ Fail($UE), Stale(%recv, %stored), Step() ]->
+  [ Out(diff('sync_failure', senc('failure', ~k))), UE_Sqn($UE, %stored) ]
+
+restriction freshness:
+  "All a b #i. Fresh(a, b) @ i ==> a ⊏ b"
+
+restriction staleness:
+  "All a b #i. Stale(a, b) @ i ==> (a ⊏ b | a = b)"
+
+restriction reg_once:
+  "All ue #i #j. Reg(ue) @ i & Reg(ue) @ j ==> #i = #j"
+
+restriction at_most_three_steps:
+  "All #a #b #c #d. Step()@a & Step()@b & Step()@c & Step()@d ==> (#a=#b|#a=#c|#a=#d|#b=#c|#b=#d|#c=#d)"
+
+lemma executable: exists-trace
+  "Ex ue #i. Fail(ue) @ i"
+
+end

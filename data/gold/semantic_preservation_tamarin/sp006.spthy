@@ -1,0 +1,32 @@
+theory sp006
+begin
+
+functions: mac/2, kdf/2
+
+// UE and home network share a long-term key (unbounded UEs).
+rule Register_LTK:
+  [ Fr(~k) ] --> [ !LTK($UE, ~k) ]
+
+// FIXED (R9): the SN name is covered by the MAC and enters the key derivation
+// kdf(k, <r, SN>) -- TS 33.501 Annex A.
+rule SN_Challenge:
+  [ !LTK($UE, ~k), Fr(~r) ]
+  --[ AuthenticatedWith(kdf(~k, <~r, $SN>), $UE, $SN) ]->
+  [ Out(<$SN, ~r, mac(<~r, $SN>, ~k)>) ]
+
+// UE accepts only on a MAC that covers the SN name, so it cannot be rewritten.
+rule UE_Accept:
+  [ !LTK($UE, ~k), In(<sn, r, mac(<r, sn>, ~k)>) ]
+  --[ Accepts(kdf(~k, <r, sn>), $UE), KeyBoundTo(kdf(~k, <r, sn>), kdf(~k, <r, sn>), sn) ]->
+  [ ]
+
+lemma executable: exists-trace
+  "Ex key n s u #e0 #e1 #e2. Accepts(s, u) @ #e0 & AuthenticatedWith(s, u, n) @ #e1 & KeyBoundTo(s, key, n) @ #e2"
+
+lemma candidate_property:
+  "All session sn ue #i0.
+     ( AuthenticatedWith(session, ue, sn) @ #i0 )
+    ==>
+     ( Ex k #j0. KeyBoundTo(session, k, sn) @ #j0 )"
+
+end
